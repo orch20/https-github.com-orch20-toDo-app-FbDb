@@ -1,6 +1,17 @@
 import { defineStore } from 'pinia'
 import { ref, reactive, computed } from 'vue'
 import { allTasks, createTask, updateTask, completeTask, deleteTask } from '../http/task-api'
+import {
+  collection,
+  onSnapshot,
+  doc,
+  addDoc,
+  deleteDoc,
+  updateDoc,
+  query,
+  orderBy
+} from 'firebase/firestore'
+import { db } from '@/server/firebase.js'
 
 export const useTaskStore = defineStore('taskStore', () => {
   const tasks = ref([])
@@ -10,12 +21,37 @@ export const useTaskStore = defineStore('taskStore', () => {
     is_completed: false
   })
 
+  const notesCollectionRef = collection(db, 'users', 'Oed1YHKxRrPbNo5IMOzwUadCwqQ2', 'notes')
+  //  const notesCollectionQuery = query(notesCollectionRef, orderBy('date', 'desc'))
+
   const completedTasks = computed(() => tasks.value.filter((task) => task.is_completed))
   const uncompletedTasks = computed(() => tasks.value.filter((task) => !task.is_completed))
 
   const fetchAllTasks = async () => {
-    const { data } = await allTasks()
-    tasks.value = data.data
+    console.log('fetchAllTasks')
+    // const { data } = await allTasks()
+    // tasks.value = data.data
+    await onSnapshot(
+      notesCollectionRef,
+      (querySnapshot) => {
+        // this.notesLoaded = false
+        const notes = []
+        querySnapshot.forEach((doc) => {
+          console.log('doc: ', doc.id, ' => ', doc.data())
+          const note = {
+            id: doc.id,
+            name: doc.data().name,
+            is_completed: doc.data().is_completed
+          }
+          notes.push(note)
+        })
+        tasks.value = notes
+        // this.notesLoaded = true
+      },
+      (error) => {
+        console.log(error.message)
+      }
+    )
   }
 
   const handelAddedTask = async (task) => {

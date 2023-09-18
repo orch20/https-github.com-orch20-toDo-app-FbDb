@@ -1,9 +1,3 @@
-<script setup>
-import NavBar from './components/NavBar.vue';
-// import TaskPage from './pages/TaskPage.vue';
-import Footer from './components/Footer.vue';
-</script>
-
 <template>
   <NavBar/>
   <!-- <TaskPage/> -->
@@ -14,6 +8,19 @@ import Footer from './components/Footer.vue';
   </router-view>
   <Footer/>
 </template>
+
+<script setup>
+import { onMounted } from 'vue';
+import NavBar from './components/NavBar.vue';
+import Footer from './components/Footer.vue';
+import { useAuthStore } from './stores/auth';
+
+const storeAuth = useAuthStore()
+
+onMounted(() => storeAuth.init())
+</script>
+
+
 
 <style scoped>
 .fade-enter-active, .fade-leave-active {

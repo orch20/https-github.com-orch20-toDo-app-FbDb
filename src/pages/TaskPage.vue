@@ -34,6 +34,7 @@ import { useTaskStore } from '../stores/task'
 import { storeToRefs } from 'pinia'
 
 const store = useTaskStore();
+
 const { completedTasks, uncompletedTasks } = storeToRefs(store);
 const {fetchAllTasks } = store
 

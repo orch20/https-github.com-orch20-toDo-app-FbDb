@@ -8,21 +8,21 @@ const router = createRouter({
   linkActiveClass: 'active'
 })
 
-router.beforeEach(async (to, from) => {
-  const store = useAuthStore()
-  await store.fetchUser()
-  if (to.meta.auth && !store.isLoggedIn) {
-    return {
-      name: 'login',
-      query: {
-        redirect: to.fullPath
-      }
-    }
-  } else if (to.meta.guest && store.isLoggedIn) {
-    return {
-      name: 'tasks'
-    }
-  }
-})
+// router.beforeEach(async (to, from) => {
+//   const store = useAuthStore()
+//   await store.fetchUser()
+//   if (to.meta.auth && !store.isLoggedIn) {
+//     return {
+//       name: 'login',
+//       query: {
+//         redirect: to.fullPath
+//       }
+//     }
+//   } else if (to.meta.guest && store.isLoggedIn) {
+//   return {
+//     name: 'tasks'
+//   }
+//   }
+// })
 
 export default router

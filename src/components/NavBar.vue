@@ -5,6 +5,7 @@
                 <span>ToDo</span>
                 <strong>List</strong>
             </a>
+            <p>{{useAuthStore.user}}</p>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -54,6 +55,7 @@
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
 import { computed, ref } from 'vue';
+
 
 const router = useRouter();
 const store = useAuthStore();
