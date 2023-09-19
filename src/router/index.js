@@ -10,7 +10,7 @@ const router = createRouter({
 
 // router.beforeEach(async (to, from) => {
 //   const store = useAuthStore()
-//   await store.fetchUser()
+//   await store.init()
 //   if (to.meta.auth && !store.isLoggedIn) {
 //     return {
 //       name: 'login',
@@ -19,9 +19,9 @@ const router = createRouter({
 //       }
 //     }
 //   } else if (to.meta.guest && store.isLoggedIn) {
-//   return {
-//     name: 'tasks'
-//   }
+//     return {
+//       name: 'tasks'
+//     }
 //   }
 // })
 

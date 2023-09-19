@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, reactive, computed } from 'vue'
-import { allTasks, createTask, updateTask, completeTask, deleteTask } from '../http/task-api'
+import { useAuthStore } from './auth'
 import {
   collection,
   onSnapshot,
@@ -20,24 +20,28 @@ export const useTaskStore = defineStore('taskStore', () => {
     name: null,
     is_completed: false
   })
+  const tasksLoaded = ref(false)
 
-  const notesCollectionRef = collection(db, 'users', 'Oed1YHKxRrPbNo5IMOzwUadCwqQ2', 'notes')
-  //  const notesCollectionQuery = query(notesCollectionRef, orderBy('date', 'desc'))
+  let notesCollectionRef
+  let notesCollectionQuery
+  let getTaskSnapshot = null
 
   const completedTasks = computed(() => tasks.value.filter((task) => task.is_completed))
   const uncompletedTasks = computed(() => tasks.value.filter((task) => !task.is_completed))
 
+  const init = () => {
+    const authStore = useAuthStore()
+    notesCollectionRef = collection(db, 'users', authStore.user.id, 'notes')
+    notesCollectionQuery = query(notesCollectionRef, orderBy('date', 'desc'))
+  }
+
   const fetchAllTasks = async () => {
-    console.log('fetchAllTasks')
-    // const { data } = await allTasks()
-    // tasks.value = data.data
-    await onSnapshot(
-      notesCollectionRef,
+    getTaskSnapshot = onSnapshot(
+      notesCollectionQuery,
       (querySnapshot) => {
-        // this.notesLoaded = false
+        tasksLoaded.value = false
         const notes = []
         querySnapshot.forEach((doc) => {
-          console.log('doc: ', doc.id, ' => ', doc.data())
           const note = {
             id: doc.id,
             name: doc.data().name,
@@ -46,43 +50,44 @@ export const useTaskStore = defineStore('taskStore', () => {
           notes.push(note)
         })
         tasks.value = notes
-        // this.notesLoaded = true
+        tasksLoaded.value = true
       },
       (error) => {
-        console.log(error.message)
+        throw new Error('Error getting tasks: ', error)
       }
     )
   }
 
-  const handelAddedTask = async (task) => {
-    const { data: createdTask } = await createTask(task)
-    tasks.value.unshift(createdTask.data)
+  const clearNotes = () => {
+    tasks.value = []
+    if (getTaskSnapshot) getTaskSnapshot() // unsubscribe
+  }
+
+  const handelAddedTask = async ({ name, is_completed }) => {
+    const date = new Date().getTime().toString()
+    await addDoc(notesCollectionRef, {
+      name,
+      is_completed,
+      date
+    })
   }
 
   const handelUpdatedTask = async (task) => {
-    const { data: updatedTask } = await updateTask(task.id, {
-      name: task.name
-    })
-    const currentTask = tasks.value.find((t) => t.id === task.id)
-    currentTask.name = updatedTask.data.name
+    const taskDocRef = doc(notesCollectionRef, task.id)
+    await updateDoc(taskDocRef, { name: task.name })
   }
 
-  const handelCompletedTask = async (task) => {
-    const { data: updatedTask } = await completeTask(task.id, {
-      is_completed: task.is_completed
-    })
-    const currentTask = tasks.value.find((t) => t.id === task.id)
-    currentTask.is_completed = updatedTask.data.is_completed
+  const handelCompletedTask = async ({ id, is_completed }) => {
+    const taskDocRef = doc(notesCollectionRef, id)
+    await updateDoc(taskDocRef, { is_completed })
   }
 
   const handelRemovedTask = async (task) => {
-    await deleteTask(task.id)
-
-    const index = tasks.value.findIndex((t) => t.id === task.id)
-    tasks.value.splice(index, 1)
+    await deleteDoc(doc(notesCollectionRef, task.id))
   }
 
   return {
+    init,
     tasks,
     task,
     completedTasks,
@@ -91,31 +96,7 @@ export const useTaskStore = defineStore('taskStore', () => {
     handelAddedTask,
     handelUpdatedTask,
     handelCompletedTask,
-    handelRemovedTask
+    handelRemovedTask,
+    clearNotes
   }
 })
-
-// export const useTaskStore = defineStore('taskStore', {
-//   state: () => ({
-//     tasks: [],
-
-//     task: {
-//       id: 1,
-//       name: 'First task',
-//       is_completed: false
-//     }
-//   }),
-//   getters: {
-//     completedTasks: (state) => state.tasks.filter((task) => task.is_completed),
-
-//     uncompletedTasks() {
-//       return this.tasks.filter((task) => !task.is_completed)
-//     }
-//   },
-//   actions: {
-//     async fetchAllTasks() {
-//       const { data } = await allTasks()
-//       this.tasks = data.data
-//     }
-//   }
-// })

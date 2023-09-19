@@ -23,7 +23,7 @@ export const useAuthStore = defineStore('authStore', () => {
   const isLoggedIn = computed(() => !!user.value.id)
 
   const init = async () => {
-    // const taskStore = useTaskStore()
+    const taskStore = useTaskStore()
 
     onAuthStateChanged(auth, async (currentUser) => {
       try {
@@ -33,12 +33,12 @@ export const useAuthStore = defineStore('authStore', () => {
           user.value.name = currentUser.displayName
 
           // router.push('/tasks')
-          // await taskStore.init()
+          taskStore.init()
         } else {
           console.log('No user is signed in.')
           user.value = {}
-          // router.replace({ name: 'home' })
-          // await taskStore.clear()
+          user.value.router.replace({ name: 'home' })
+          await taskStore.clear()
         }
       } catch (error) {
         user.value = {}
@@ -114,7 +114,6 @@ export const useAuthStore = defineStore('authStore', () => {
       // User signed out
       console.log('User signed out')
     } catch (error) {
-      // An error happened during sign-out
       console.error('Error: ', error.message)
     }
     user.value = {}
