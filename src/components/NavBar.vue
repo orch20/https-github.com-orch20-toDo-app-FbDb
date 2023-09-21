@@ -10,7 +10,7 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse  show" id="navbarNav">
                 <ul  class="navbar-nav" v-if="store.isLoggedIn">
                     <li class="nav-item">
                         <router-link :to="{name:'tasks'}" class="nav-link">Tasks</router-link>

@@ -7,21 +7,21 @@
             </h1>
             <h2 class="h3 mb-4 fw-normal">Please sign up</h2>
              <div class="form-floating mb-2">
-                <input type="name" class="form-control" :class="{ 'is-invalid': errors.name && errors.name[0] }" id="name" v-model="form.name"  placeholder="Your name" />
+                <input type="name" class="form-control" :class="{ 'is-invalid': errors.name && errors.name[0] }" id="name" v-model="form.name"  placeholder="Your name" autocomplete="given-name" />
                 <label for="name">Name</label>
                 <div class="invalid-feedback" v-if="errors.name && errors.name[0]">
                 {{ errors.name && errors.name[0] }}
                 </div>
             </div>
             <div class="form-floating mb-2">
-                <input type="email" class="form-control" :class="{ 'is-invalid': errors.email && errors.email[0] }" id="email" v-model="form.email"  placeholder="name@example.com" />
+                <input type="email" class="form-control" :class="{ 'is-invalid': errors.email && errors.email[0] }" id="email" v-model="form.email"  placeholder="name@example.com" autocomplete="email" />
                 <label for="email">Email</label>
                 <div class="invalid-feedback" v-if="errors.email && errors.email[0]">
                 {{ errors.email && errors.email[0] }}
                 </div>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="password" :class="{ 'is-invalid': errors.password && errors.password[0] }" v-model="form.password"  placeholder="Password" />
+                <input type="password" class="form-control" id="password" :class="{ 'is-invalid': errors.password && errors.password[0] }" v-model="form.password"  placeholder="Password" autocomplete="new-password"/>
                 <label for="password">Password</label>
                 <div class="invalid-feedback" v-if="errors.password && errors.password[0]">
                     {{ errors.password && errors.password[0] }}
@@ -29,7 +29,7 @@
             </div>
             <div class="form-floating mb-3">
                 <input type="password" class="form-control" id="password_confirmation" v-model="form.password_confirmation"
-                    placeholder="Password Confirmation" />
+                    placeholder="Password Confirmation" autocomplete="new-password" />
                 <label for="password_confirmation">Password Confirmation</label>
             </div>
             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>

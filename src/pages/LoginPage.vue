@@ -5,16 +5,18 @@
                 <span>ToDo</span>
                 <strong>List</strong>
             </h1>
+            <div>{{ errors.message}}
+            </div>
             <h2 class="h3 mb-4 fw-normal">Please sign in</h2>
             <div class="form-floating mb-2">
-                <input type="email" class="form-control" :class="{ 'is-invalid': errors.email && errors.email[0] }" id="email" v-model="form.email"  placeholder="name@example.com" />
+                <input type="email" class="form-control" :class="{ 'is-invalid': errors.email && errors.email[0] }" id="email" v-model="form.email"  placeholder="name@example.com" autocomplete="email" />
                 <label for="email">Email</label>
                 <div class="invalid-feedback" v-if="errors.email && errors.email[0]">
                 {{errors.email && errors.email[0]}}
                 </div>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="password" :class="{ 'is-invalid': errors.password && errors.password[0] }" v-model="form.password"  placeholder="Password" />
+                <input type="password" class="form-control" id="password" :class="{ 'is-invalid': errors.password && errors.password[0] }" v-model="form.password"  placeholder="Password" autocomplete="current-password" />
                 <label for="password">Password</label>
                 <div class="invalid-feedback" v-if="errors.password && errors.password[0]">
                     {{ errors.password && errors.password[0] }}
@@ -33,7 +35,7 @@ import { useAuthStore } from '../stores/auth';
 
 const router = useRouter();
 const store = useAuthStore();
-const { isLoggedIn, errors } = storeToRefs(store);
+const { isLoggedIn, errors, errorDescription } = storeToRefs(store);
 const {handelLogin} = store;
 
 const form = reactive({

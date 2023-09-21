@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import { ref, computed, reactive } from 'vue'
-
+import { ref, computed } from 'vue'
+import router from '@/router'
 // import { csrfCookie, login, register, logout, getUser } from '../http/auth-api'
 import {
   createUserWithEmailAndPassword,
@@ -11,6 +11,7 @@ import {
 } from 'firebase/auth'
 import { auth } from '@/server/firebase.js'
 import { useTaskStore } from './task'
+// import getFirebaseAuthError from '@/helpers/firebaseAuthErrors'
 
 export const useAuthStore = defineStore('authStore', () => {
   const user = ref({
@@ -18,9 +19,18 @@ export const useAuthStore = defineStore('authStore', () => {
     email: '',
     name: ''
   })
-  const errors = ref({})
+  const errors = ref({
+    message: ''
+  })
 
   const isLoggedIn = computed(() => !!user.value.id)
+
+  const errorDescription = computed(() => {
+    if (errors.value.message) {
+      return getFirebaseAuthError(errors.value.message)
+    }
+    return 'Something went wrong. Please try again.'
+  })
 
   const init = async () => {
     const taskStore = useTaskStore()
@@ -37,8 +47,8 @@ export const useAuthStore = defineStore('authStore', () => {
         } else {
           console.log('No user is signed in.')
           user.value = {}
-          user.value.router.replace({ name: 'home' })
-          await taskStore.clear()
+          router.replace({ name: 'home' })
+          taskStore.clearNotes()
         }
       } catch (error) {
         user.value = {}
@@ -54,58 +64,26 @@ export const useAuthStore = defineStore('authStore', () => {
         credentials.email,
         credentials.password
       )
-
-      const user = userCredential.user
+      // const user = userCredential.user
       // You can now access the signed-in user here
       console.log('User: ', user)
     } catch (error) {
-      const errorCode = error.code
-      const errorMessage = error.message
-      // Handle the sign-in error here
-      console.error('Error: ', errorCode, errorMessage)
+      errors.value.message = error.code
+      // console.log('Login Error:', error.code, error.message)
+      console.log(errors.value.message)
     }
-
-    // try {
-    //   await login(credentials)
-    //   await fetchUser()
-    //   errors.value = {}
-    // } catch (error) {
-    //   if (error.response && error.response.status === 422) {
-    //     errors.value = error.response.data.errors
-    //   }
-    // }
   }
 
   const handelRegister = async (credentials) => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        credentials.email,
-        credentials.password
-      )
-
-      user.value = userCredential.user
-
+      await createUserWithEmailAndPassword(auth, credentials.email, credentials.password)
       await updateProfile(auth.currentUser, { displayName: credentials.name })
-
-      console.log('User registered successfully:', user.value)
     } catch (error) {
       const errorCode = error.code
       const errorMessage = error.message
       console.error('Registration Error:', errorCode, errorMessage)
+      errors.value.message = error.code
     }
-
-    // try {
-    //   await register(newUser)
-    //   await handelLogin({
-    //     email: newUser.email,
-    //     password: newUser.password
-    //   })
-    // } catch (error) {
-    //   if (error.response && error.response.status === 422) {
-    //     errors.value = error.response.data.errors
-    //   }
-    // }
   }
 
   const handelLogout = async () => {
@@ -122,6 +100,7 @@ export const useAuthStore = defineStore('authStore', () => {
     user,
     isLoggedIn,
     errors,
+    errorDescription,
     init,
     handelLogin,
     handelRegister,

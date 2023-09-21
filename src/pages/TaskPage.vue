@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import { onMounted,ref, computed  } from 'vue';
+import { ref, computed  } from 'vue';
 import TasksList from '../components/tasks/TasksList.vue'
 import NewTask from '../components/tasks/NewTask.vue'
 import { useTaskStore } from '../stores/task'
@@ -36,13 +36,13 @@ import { storeToRefs } from 'pinia'
 const store = useTaskStore();
 
 const { completedTasks, uncompletedTasks } = storeToRefs(store);
-const {fetchAllTasks } = store
+// const {fetchAllTasks } = store
 
 
 
-onMounted(async () => {
-    await fetchAllTasks ()   
-});
+// onMounted(async () => {
+//     await fetchAllTasks ()   
+// });
 
 const showToggleCompletedBtn = computed(
     () => uncompletedTasks.value.length > 0 && completedTasks.value.length > 0);

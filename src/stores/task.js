@@ -33,6 +33,7 @@ export const useTaskStore = defineStore('taskStore', () => {
     const authStore = useAuthStore()
     notesCollectionRef = collection(db, 'users', authStore.user.id, 'notes')
     notesCollectionQuery = query(notesCollectionRef, orderBy('date', 'desc'))
+    fetchAllTasks()
   }
 
   const fetchAllTasks = async () => {
