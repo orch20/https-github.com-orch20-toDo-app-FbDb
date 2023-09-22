@@ -48,7 +48,6 @@ export const useAuthStore = defineStore('authStore', () => {
           console.log('No user is signed in.')
           user.value = {}
           router.replace({ name: 'home' })
-          taskStore.clearNotes()
         }
       } catch (error) {
         user.value = {}
@@ -87,8 +86,10 @@ export const useAuthStore = defineStore('authStore', () => {
   }
 
   const handelLogout = async () => {
+    const taskStore = useTaskStore()
     try {
       await signOut(auth)
+      taskStore.clearNotes()
       // User signed out
       console.log('User signed out')
     } catch (error) {
