@@ -18,7 +18,8 @@ export const useTaskStore = defineStore('taskStore', () => {
   const task = reactive({
     id: null,
     name: null,
-    is_completed: false
+    is_completed: false,
+    date: null
   })
   const tasksLoaded = ref(false)
 
@@ -46,7 +47,8 @@ export const useTaskStore = defineStore('taskStore', () => {
           const note = {
             id: doc.id,
             name: doc.data().name,
-            is_completed: doc.data().is_completed
+            is_completed: doc.data().is_completed,
+            date: doc.data().date
           }
           notes.push(note)
         })
@@ -65,7 +67,9 @@ export const useTaskStore = defineStore('taskStore', () => {
   }
 
   const handelAddedTask = async ({ name, is_completed }) => {
-    const date = new Date().getTime().toString()
+    const date = new Date().toString()
+    // get current date
+
     await addDoc(notesCollectionRef, {
       name,
       is_completed,

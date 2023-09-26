@@ -32,10 +32,10 @@ export const useAuthStore = defineStore('authStore', () => {
     return 'Something went wrong. Please try again.'
   })
 
-  const init = async () => {
+  const init = () => {
     const taskStore = useTaskStore()
 
-    onAuthStateChanged(auth, async (currentUser) => {
+    const removeListener = onAuthStateChanged(auth, async (currentUser) => {
       try {
         if (currentUser) {
           user.value.id = currentUser.uid
@@ -44,6 +44,7 @@ export const useAuthStore = defineStore('authStore', () => {
 
           // router.push('/tasks')
           taskStore.init()
+          removeListener()
         } else {
           console.log('No user is signed in.')
           user.value = {}
@@ -63,9 +64,6 @@ export const useAuthStore = defineStore('authStore', () => {
         credentials.email,
         credentials.password
       )
-      // const user = userCredential.user
-      // You can now access the signed-in user here
-      console.log('User: ', user)
     } catch (error) {
       errors.value.message = error.code
       // console.log('Login Error:', error.code, error.message)

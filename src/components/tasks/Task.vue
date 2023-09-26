@@ -8,7 +8,7 @@
             :checked="task.is_completed"
             @change="markTaskAsCompleted"
             />
-            <div class="ms-2 flex-grow-" 
+            <div class="ms-2 flex-grow-1" 
             :class="completedClass" 
             title="Double click the text to edit or remove"
             @dblclick="$event => isEdit=true">
@@ -23,7 +23,7 @@
                 </div>
                 <span v-else>{{ task.name }}</span>
             </div>
-            <!-- <div class="task-date">24 Feb 12:00</div> -->
+            <div class="task-date left">{{formattedDate.value}}</div>
         </div>
         <TaskActions 
             @edit="$event=>isEdit = true" 
@@ -36,7 +36,8 @@
 <script setup>
 import { computed, ref } from 'vue';
 import TaskActions from './TaskActions.vue';
-import {useTaskStore} from '../../stores/task';
+import { useTaskStore } from '../../stores/task';
+import { useDateFormat } from '@vueuse/core'
 
 const store = useTaskStore();
 
@@ -83,6 +84,11 @@ const removeTask = async () => {
     
     
 }
+
+const formattedDate = computed(() => {
+    return useDateFormat(props.task.date, 'DD.MM.YY HH:mm:ss')
+})
+
 
 
 
