@@ -28,3 +28,11 @@ const addNewTask = async event => {
 }
 
 </script>
+
+<style scoped>
+.form-control:focus {
+  box-shadow: none;
+  border-color: olive;
+  
+}
+</style>

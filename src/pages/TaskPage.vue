@@ -1,7 +1,7 @@
 <template>
     <main style="min-height: 50vh; margin-top: 2rem;">
             <div class="container">
-                <div class="row">
+                <div class="row" style="height: calc(100vh - 220px); overflow-y: auto;">
                     <div class="col-md-8 offset-md-2">
                         <!-- Add new Task -->
                         <NewTask/>

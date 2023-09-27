@@ -12,7 +12,7 @@
             :class="completedClass" 
             title="Double click the text to edit or remove"
             @dblclick="$event => isEdit=true">
-                <div class="relative" v-if="isEdit">
+                <div class="relative" v-if="isEdit" ref="onChangeFocusAutoSave">
                     <input class="editable-task" 
                         type="text" 
                         v-focus
@@ -34,10 +34,10 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import TaskActions from './TaskActions.vue';
 import { useTaskStore } from '../../stores/task';
-import { useDateFormat } from '@vueuse/core'
+import { useDateFormat, useFocusWithin } from '@vueuse/core'
 
 const store = useTaskStore();
 
@@ -53,10 +53,11 @@ const vFocus = {
 
 const updateTask = async event => {
     // if (editingTask.value === props.task.name) return;
+    console.log('event.target.value', event.target.value);
     const updatedTask = {
         ...props.task,
         name: event.target.value
-
+        
     }
     isEdit.value = false;
     await handelUpdatedTask(updatedTask);
@@ -87,6 +88,14 @@ const removeTask = async () => {
 
 const formattedDate = computed(() => {
     return useDateFormat(props.task.date, 'DD.MM.YY HH:mm:ss')
+})
+
+const onChangeFocusAutoSave = ref();
+const { focused } = useFocusWithin(onChangeFocusAutoSave)
+
+watch(focused, focused => {
+    if (!focused) updateTask()
+    
 })
 
 
