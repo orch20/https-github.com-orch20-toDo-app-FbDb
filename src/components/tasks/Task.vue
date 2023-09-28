@@ -53,7 +53,7 @@ const vFocus = {
 
 const updateTask = async event => {
     // if (editingTask.value === props.task.name) return;
-    console.log('event.target.value', event.target.value);
+    // if (!event || !event.target) return;
     const updatedTask = {
         ...props.task,
         name: event.target.value
@@ -95,7 +95,8 @@ const { focused } = useFocusWithin(onChangeFocusAutoSave)
 
 watch(focused, focused => {
     if (!focused) updateTask()
-    
+    console.log('focused');
+
 })
 
 
