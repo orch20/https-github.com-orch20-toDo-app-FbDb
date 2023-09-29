@@ -12,13 +12,14 @@
             :class="completedClass" 
             title="Double click the text to edit or remove"
             @dblclick="$event => isEdit=true">
-                <div class="relative" v-if="isEdit" ref="onChangeFocusAutoSave">
+                <div  class="relative" v-if="isEdit">
                     <input class="editable-task" 
                         type="text" 
                         v-focus
                         @keyup.esc="undo" 
                         @keyup.enter="updateTask"
                         v-model="editingTask"
+                        v-on-click-outside="onClickOutsideHandler"
                     />
                 </div>
                 <span v-else>{{ task.name }}</span>
@@ -34,10 +35,11 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue';
+import { computed, ref} from 'vue';
 import TaskActions from './TaskActions.vue';
 import { useTaskStore } from '../../stores/task';
-import { useDateFormat, useFocusWithin } from '@vueuse/core'
+import { useDateFormat} from '@vueuse/core'
+import { vOnClickOutside } from '@vueuse/components'
 
 const store = useTaskStore();
 
@@ -52,11 +54,10 @@ const vFocus = {
 };
 
 const updateTask = async event => {
-    // if (editingTask.value === props.task.name) return;
-    // if (!event || !event.target) return;
+    
     const updatedTask = {
         ...props.task,
-        name: event.target.value
+        name: await event.target.value
         
     }
     isEdit.value = false;
@@ -90,14 +91,13 @@ const formattedDate = computed(() => {
     return useDateFormat(props.task.date, 'DD.MM.YY HH:mm:ss')
 })
 
-const onChangeFocusAutoSave = ref();
-const { focused } = useFocusWithin(onChangeFocusAutoSave)
+// save the task on click outside
 
-watch(focused, focused => {
-    if (!focused) updateTask()
-    console.log('focused');
+const onClickOutsideHandler = [
+    (e) => updateTask(e),
+    // { ignore: [ignoreElRef] }
+]
 
-})
 
 
 

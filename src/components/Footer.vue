@@ -1,5 +1,5 @@
 <template>
-    <footer class="fixed-bottom bg-white">
+    <footer class="fixed-bottom">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item">
                 <a href="#" class="nav-link px-2 text-muted">Term</a>
@@ -17,3 +17,9 @@
         <p class="text-center text-muted">&copy; 2023 ToDoList</p>
     </footer>
 </template>
+
+<style>
+    footer {
+        backdrop-filter: blur(2px)
+    }
+</style>
