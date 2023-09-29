@@ -11,17 +11,6 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   const store = useAuthStore()
 
-  function checkLoggedIn() {
-    return new Promise((resolve, reject) => {
-      resolve(store.isLoggedIn)
-    })
-  }
-
-  // Usage:
-  checkLoggedIn().then((isLoggedIn) => {
-    console.log(isLoggedIn)
-  })
-
   if (to.meta.auth && !store.isLoggedIn) {
     return {
       name: 'home',

@@ -25,12 +25,12 @@ export const useAuthStore = defineStore('authStore', () => {
 
   const isLoggedIn = computed(() => !!user.value.id)
 
-  const errorDescription = computed(() => {
-    if (errors.value.message) {
-      return getFirebaseAuthError(errors.value.message)
-    }
-    return 'Something went wrong. Please try again.'
-  })
+  // const errorDescription = computed(() => {
+  //   if (errors.value.message) {
+  //     return getFirebaseAuthError(errors.value.message)
+  //   }
+  //   return 'Something went wrong. Please try again.'
+  // })
 
   const init = () => {
     const taskStore = useTaskStore()
@@ -42,7 +42,7 @@ export const useAuthStore = defineStore('authStore', () => {
           user.value.email = currentUser.email
           user.value.name = currentUser.displayName
 
-          // router.push('/tasks')
+          router.push('/tasks')
           taskStore.init()
           removeListener()
         } else {
@@ -99,7 +99,7 @@ export const useAuthStore = defineStore('authStore', () => {
     user,
     isLoggedIn,
     errors,
-    errorDescription,
+    // errorDescription,
     init,
     handelLogin,
     handelRegister,

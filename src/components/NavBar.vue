@@ -6,7 +6,7 @@
                 <strong>List</strong>
             </a>
             <p>{{useAuthStore.user}}</p>
-            <button @click="toggleMenu" ref="ignoreElRef" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            <button @click="toggleMenu" ref="ignoreElRef" class="navbar-toggler" :class="{ collapsed: !isOpenMenu }" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -99,4 +99,57 @@ const onClickOutsideHandler = [
 .min-width-38 {
   min-width: 90px;
 }
+
+.navbar-toggler-icon {
+  background-image: none!important;
+  background-color: var(--bs-gray-800);
+  height: 3px;
+  width: 25px;
+  margin: 10px 0;
+  position: relative;
+  transition: all 0.35s ease-out;
+  transform-origin: center;
+}
+
+.navbar-toggler-icon::before {
+  display: block;
+  background-color: var(--bs-gray-800);
+  height: 3px;
+  content: "";
+  position: relative;
+  top: -7px;
+  transition: all 0.15s ease-out;/*taken down to hide quicker*/
+  transform-origin: center;
+}
+
+.navbar-toggler-icon::after {
+  display: block;
+  background-color: var(--bs-gray-800);
+  height: 3px;
+  content: "";
+  position: relative;
+  top: 4px;
+  transition: all 0.35s ease-out;
+  transform-origin: center;
+}
+
+.navbar-dark .navbar-toggler-icon,
+.navbar-dark .navbar-toggler-icon::before,
+.navbar-dark .navbar-toggler-icon::after {
+  background-color: var(--bs-gray-100);
+}
+
+.navbar-toggler:not(.collapsed) .navbar-toggler-icon {
+  transform: rotate(45deg);
+}
+
+.navbar-toggler:not(.collapsed) .navbar-toggler-icon::before {
+  opacity: 0;
+}
+
+.navbar-toggler:not(.collapsed) .navbar-toggler-icon::after {
+  transform: rotate(-90deg) translateX(7px);
+}
+
+
 </style>
