@@ -33,7 +33,7 @@
                             
                         </li> -->
                         <li class="nav-item dropdown" >
-                            <a class="nav-link dropdown-toggle" :class="toggleClassNameMenu" @click.prevent="toggleNameMenu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a v-on-click-outside="onClickOutsideHandler" class="nav-link dropdown-toggle" :class="toggleClassNameMenu" @click.prevent="toggleNameMenu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{store.user.name}}
                             </a>
                             <ul class="dropdown-menu" :class="toggleClassNameMenu" v-show="isOpenNameMenu">
@@ -79,6 +79,7 @@ const logout = async () => {
 const onClickOutsideHandler = [
     () => {
         isOpenMenu.value = false
+        isOpenNameMenu.value = false
     },
     { ignore: [ignoreElRef] }
 ]
