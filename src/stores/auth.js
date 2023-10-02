@@ -11,6 +11,7 @@ import {
 } from 'firebase/auth'
 import { auth } from '@/server/firebase.js'
 import { useTaskStore } from './task'
+import { showRelevantErrorMessage } from '@/helpers/firebaseAuthErrors'
 // import getFirebaseAuthError from '@/helpers/firebaseAuthErrors'
 
 export const useAuthStore = defineStore('authStore', () => {
@@ -25,12 +26,12 @@ export const useAuthStore = defineStore('authStore', () => {
 
   const isLoggedIn = computed(() => !!user.value.id)
 
-  // const errorDescription = computed(() => {
-  //   if (errors.value.message) {
-  //     return getFirebaseAuthError(errors.value.message)
-  //   }
-  //   return 'Something went wrong. Please try again.'
-  // })
+  const errorDescription = computed(() => {
+    if (errors.value.message) {
+      return showRelevantErrorMessage(errors.value.message)
+    }
+    return 'Something went wrong. Please try again.'
+  })
 
   const init = () => {
     const taskStore = useTaskStore()
@@ -59,6 +60,8 @@ export const useAuthStore = defineStore('authStore', () => {
 
   const handelLogin = async (credentials) => {
     try {
+      const errorCode = ''
+      const errorMessage = ''
       const userCredential = await signInWithEmailAndPassword(
         auth,
         credentials.email,
@@ -73,6 +76,7 @@ export const useAuthStore = defineStore('authStore', () => {
 
   const handelRegister = async (credentials) => {
     try {
+      errors.value.message = ''
       await createUserWithEmailAndPassword(auth, credentials.email, credentials.password)
       await updateProfile(auth.currentUser, { displayName: credentials.name })
     } catch (error) {
@@ -88,6 +92,7 @@ export const useAuthStore = defineStore('authStore', () => {
     try {
       await signOut(auth)
       taskStore.clearNotes()
+      errors.value.message = ''
       // User signed out
       console.log('User signed out')
     } catch (error) {
@@ -99,7 +104,7 @@ export const useAuthStore = defineStore('authStore', () => {
     user,
     isLoggedIn,
     errors,
-    // errorDescription,
+    errorDescription,
     init,
     handelLogin,
     handelRegister,

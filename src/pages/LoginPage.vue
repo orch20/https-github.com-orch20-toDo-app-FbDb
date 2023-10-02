@@ -5,24 +5,19 @@
                 <span>ToDo</span>
                 <strong>List</strong>
             </h1>
-            <div>{{ errors.message}}
-            </div>
             <h2 class="h3 mb-4 fw-normal">Please sign in</h2>
             <div class="form-floating mb-2">
-                <input type="email" class="form-control" :class="{ 'is-invalid': errors.email && errors.email[0] }" id="email" v-model="form.email"  placeholder="name@example.com" autocomplete="email" />
+                <input type="email" class="form-control" :class="{ 'is-invalid': errors.message }" id="email" v-model="form.email"  placeholder="name@example.com" autocomplete="email" />
                 <label for="email">Email</label>
-                <div class="invalid-feedback" v-if="errors.email && errors.email[0]">
-                {{errors.email && errors.email[0]}}
-                </div>
+               
             </div>
             <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="password" :class="{ 'is-invalid': errors.password && errors.password[0] }" v-model="form.password"  placeholder="Password" autocomplete="current-password" />
+                <input type="password" class="form-control" id="password" :class="{ 'is-invalid': errors.message }" v-model="form.password"  placeholder="Password" autocomplete="current-password" />
                 <label for="password">Password</label>
-                <div class="invalid-feedback" v-if="errors.password && errors.password[0]">
-                    {{ errors.password && errors.password[0] }}
-                    </div>
+                
             </div>
             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <ErrorAuthMessage v-if="errors.message"/>
         </form>
     </main>
 </template>
@@ -32,10 +27,11 @@ import {useRouter} from 'vue-router';
 import { reactive } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../stores/auth';
+import ErrorAuthMessage from '../components/ErrorAuthMessage.vue';
 
 const router = useRouter();
 const store = useAuthStore();
-const { isLoggedIn, errors, errorDescription } = storeToRefs(store);
+const { isLoggedIn, errors} = storeToRefs(store);
 const {handelLogin} = store;
 
 const form = reactive({
@@ -68,4 +64,22 @@ const form = reactive({
 .auth-form {
     width: 400px;
 }
+
+
+/* Animation */
+.typewriter {
+color:red;
+      white-space: nowrap;
+  overflow: hidden; 
+  animation: animated-text 2s steps(30,end) 1s 1 normal both;
+}
+
+/* text animation */
+
+@keyframes animated-text{
+  from{width: 0;}
+    to{width: 100%;}
+}
+
+
 </style>
