@@ -40,6 +40,7 @@ import TaskActions from './TaskActions.vue';
 import { useTaskStore } from '../../stores/task';
 import { useDateFormat} from '@vueuse/core'
 import { vOnClickOutside } from '@vueuse/components'
+import Swal from 'sweetalert2'
 
 const store = useTaskStore();
 
@@ -53,11 +54,10 @@ const vFocus = {
     mounted: (el) => el.focus(),
 };
 
-const updateTask = async event => {
-    
+const updateTask = async () => {
     const updatedTask = {
         ...props.task,
-        name: await event.target.value
+        name: editingTask.value
         
     }
     isEdit.value = false;
@@ -80,9 +80,27 @@ const markTaskAsCompleted = async () => {
 }
 
 const removeTask = async () => {
-    if (confirm('Are you sure?')) {
-        await handelRemovedTask(props.task);
-    }
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        // icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            handelRemovedTask(props.task);
+            // Swal.fire(
+            //     'Deleted!',
+            //     'Your file has been deleted.',
+            //     'success'
+            // )
+        }
+    })
+    // if (confirm('Are you sure?')) {
+    //     await handelRemovedTask(props.task);
+    // }
     
     
 }
@@ -93,15 +111,10 @@ const formattedDate = computed(() => {
 
 // save the task on click outside
 
-const onClickOutsideHandler = [
-    (e) => updateTask(e),
-    // { ignore: [ignoreElRef] }
-]
-
-
-
-
-
+const onClickOutsideHandler = () => {
+    updateTask()
+}
+ 
     const props = defineProps (
         {
             task: {
