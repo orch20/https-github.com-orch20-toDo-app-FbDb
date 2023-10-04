@@ -14,9 +14,8 @@
             <div class="form-floating mb-3">
                 <input type="password" class="form-control" id="password" :class="{ 'is-invalid': errors.message }" v-model="form.password"  placeholder="Password" autocomplete="current-password" />
                 <label for="password">Password</label>
-                
             </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <ButtonAuth>Sign in</ButtonAuth>
             <ErrorAuthMessage v-if="errors.message"/>
         </form>
     </main>
@@ -28,6 +27,7 @@ import { reactive } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../stores/auth';
 import ErrorAuthMessage from '../components/ErrorAuthMessage.vue';
+import ButtonAuth from './ButtonAuth.vue';
 
 const router = useRouter();
 const store = useAuthStore();

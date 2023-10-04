@@ -25,7 +25,7 @@
                     placeholder="Password Confirmation" autocomplete="new-password" />
                 <label for="password_confirmation">Password Confirmation</label>
             </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+            <ButtonAuth>Sign up</ButtonAuth>
             <ErrorAuthMessage :errorMessage="form.errorMessage" v-if="errors.message || form.passwordNotMatch"/>
         </form>
     </main>
@@ -37,6 +37,7 @@ import { reactive } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../stores/auth';
 import ErrorAuthMessage from '../components/ErrorAuthMessage.vue';
+import ButtonAuth from './ButtonAuth.vue';
 
 const router = useRouter();
 const store = useAuthStore();
