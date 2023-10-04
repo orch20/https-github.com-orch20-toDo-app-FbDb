@@ -4,6 +4,9 @@ import LoginPage from '../pages/LoginPage.vue'
 import RegisterPage from '../pages/RegisterPage.vue'
 import LogoutPage from '../pages/LogoutPage.vue'
 import SummaryPage from '../pages/SummaryPage.vue'
+import AboutPage from '../pages/AboutPage.vue'
+import FaqPage from '../pages/FaqPage.vue'
+import PolicyPage from '../pages/PolicyPage.vue'
 import NotFoundPage from '../pages/errors/NotFoundErrorPage.vue'
 
 const routes = [
@@ -53,6 +56,21 @@ const routes = [
     path: '/:pathMatch(.*)*',
     component: NotFoundPage,
     name: 'notFound'
+  },
+  {
+    path: '/about',
+    component: AboutPage,
+    name: 'about'
+  },
+  {
+    path: '/faq',
+    component: FaqPage,
+    name: 'faq'
+  },
+  {
+    path: '/policy',
+    component: PolicyPage,
+    name: 'policy'
   }
 ]
 

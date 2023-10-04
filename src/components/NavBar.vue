@@ -29,15 +29,12 @@
                         </li>
                     </template>
                     <template v-else>
-                        <!-- <li class="nav-item" >
-                            
-                        </li> -->
-                        <li class="nav-item dropdown" >
-                            <a v-on-click-outside="onClickOutsideHandler" class="nav-link dropdown-toggle" :class="toggleClassNameMenu" @click.prevent="toggleNameMenu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <li class="nav-item dropdown d-flex flex-column " >
+                            <a v-on-click-outside="onClickOutsideHandler" class="ms-auto nav-link dropdown-toggle" :class="toggleClassNameMenu" @click.prevent="toggleNameMenu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{store.user.name}}
                             </a>
                             <ul class="dropdown-menu" :class="toggleClassNameMenu" v-show="isOpenNameMenu">
-                                <li>
+                                <li >
                                     <router-link  :to="{ name: 'logout' }" class="dropdown-item" @click.prevent="logout" >Logout</router-link>
                                 </li>
                                 
