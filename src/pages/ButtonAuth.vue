@@ -1,12 +1,10 @@
 <template>
-     <button class="w-100 btn btn-lg btn-primary bn39" type="submit"><span class="bn39span"><slot></slot></span></button>
+     <button class="w-100 btn btn-lg btn-primary btn-auth" type="submit"><span class="btn-auth--span"><slot></slot></span></button>
 </template>
 
-<!-- <a class="bn39" href="/"><span class="bn39span">Button</span></a> -->
-
 <style scoped>
-.bn39 {
-  background-image: linear-gradient(135deg, #008aff, #86d472);
+.btn-auth {
+  background-image: linear-gradient(135deg, #0dcaf0, #86d472);
   border-radius: 6px;
   box-sizing: border-box;
   color: #6c757d;
@@ -21,11 +19,11 @@
   z-index: 2;
 }
 
-.bn39:hover {
+.btn-auth:hover {
   color: #fff;
 }
 
-.bn39 .bn39span {
+.btn-auth .btn-auth--span {
   align-items: center;
   background: #e4e4e5bb;
   border-radius: 6px;
@@ -36,7 +34,7 @@
   width: 100%;
 }
 
-.bn39:hover .bn39span {
+.btn-auth:hover .btn-auth--span {
   background: transparent;
 }
 </style>

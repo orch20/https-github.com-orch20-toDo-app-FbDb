@@ -1,5 +1,5 @@
 <template>
-    <main class="auth-wrapper">
+    <main class="auth-wrapper px-4 my-5">
         <form class="auth-form" @submit.prevent="handleSubmit">
             <h1>
                 <span>ToDo</span>

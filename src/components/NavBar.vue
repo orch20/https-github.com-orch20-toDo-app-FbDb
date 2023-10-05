@@ -149,5 +149,21 @@ const onClickOutsideHandler = [
   transform: rotate(-90deg) translateX(7px);
 }
 
+/* logout button */
+@media (min-width: 992px){
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+}
+.dropdown-menu{
+    top: 60px
+}
+}
+.dropdown-menu{
+    padding: 0px;
+    min-width: 4rem
+}
+.dropdown-item:hover{
+    color:red
+}
 
 </style>
