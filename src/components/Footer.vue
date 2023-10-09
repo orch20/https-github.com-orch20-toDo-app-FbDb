@@ -1,5 +1,6 @@
 <template>
     <footer class="footer fixed-bottom ">
+        
         <ul class="nav justify-content-center border-bottom pb-3 mb-3 ">
             <li class="nav-item">
                 <router-link :to="{ name: 'policy' }" class="nav-link px-2  me-2 text-muted">Privacy</router-link>
@@ -10,10 +11,17 @@
             <li class="nav-item">
                 <router-link :to="{name: 'about'}" class="nav-link px-2 me-2 text-muted">About</router-link>
             </li>
+            <DayNightToggleButton/>
         </ul>
+        
         <p class="text-center text-muted">&copy; 2023 ToDoList</p>
+        
     </footer>
 </template>
+
+<script setup>
+import DayNightToggleButton from './DayNightToggleButton.vue';
+</script>
 
 <style>
     footer {
