@@ -13,19 +13,19 @@
             <div v-on-click-outside="onClickOutsideHandler" class="collapse navbar-collapse" :class="toggleClassMenu" id="navbarNav">
                 <ul  class="navbar-nav" v-if="store.isLoggedIn">
                     <li class="nav-item">
-                        <router-link :to="{name:'tasks'}" class="nav-link">Tasks</router-link>
+                        <router-link :to="{name:'tasks'}" class="nav-link">{{ $t("navbar.tasks") }}</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link :to="{ name: 'summary'}" class="nav-link">Summary</router-link>
+                        <router-link :to="{ name: 'summary'}" class="nav-link">{{ $t("navbar.summary") }}</router-link>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <template v-if="!store.isLoggedIn">
                         <li class="nav-item">
-                            <router-link  :to="{ name: 'login' }"  class="btn btn-outline-secondary ms-2 margin-top min-width-38">Login</router-link>
+                            <router-link  :to="{ name: 'login' }"  class="btn btn-outline-secondary ms-2 margin-top min-width-38">{{ $t("button.login") }}</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link  :to="{ name: 'register' }" class="btn btn-outline-secondary ms-2 margin-top min-width-38">Register</router-link>
+                            <router-link  :to="{ name: 'register' }" class="btn btn-outline-secondary ms-2 margin-top min-width-38">{{ $t("button.register") }}</router-link>
                         </li>
                     </template>
                     <template v-else>
@@ -35,7 +35,7 @@
                             </a>
                             <ul class="dropdown-menu" :class="toggleClassNameMenu" v-show="isOpenNameMenu">
                                 <li >
-                                    <router-link  :to="{ name: 'logout' }" class="dropdown-item" @click.prevent="logout" >Logout</router-link>
+                                    <router-link  :to="{ name: 'logout' }" class="dropdown-item" @click.prevent="logout" >{{ $t("button.logout") }}</router-link>
                                 </li>
                                 
                             </ul>

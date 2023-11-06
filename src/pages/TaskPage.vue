@@ -12,7 +12,7 @@
                         <div class="text-center my-3" v-show="showToggleCompletedBtn">
                             <button class="btn btn-sm btn-secondary"
                              @click="$event=> showCompletedTasks = !showCompletedTasks">
-                                {{ showCompletedTasks ? 'Hide' : 'Show' }} completed
+                                {{ showCompletedTasks ? $t("button.hide") : $t("button.show") }} {{$t("button.completed")}}
                             </button>
                         </div>
                         <TasksList 

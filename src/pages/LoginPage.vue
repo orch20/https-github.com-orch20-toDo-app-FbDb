@@ -5,17 +5,17 @@
                 <span>ToDo</span>
                 <strong>List</strong>
             </h1>
-            <h2 class="h3 mb-4 fw-normal">Please sign in</h2>
+            <h2 class="h3 mb-4 fw-normal">{{ $t("logPage.login") }}</h2>
             <div class="form-floating mb-2">
                 <input type="email" class="form-control" :class="{ 'is-invalid': errors.message }" id="email" v-model="form.email"  placeholder="name@example.com" autocomplete="email" />
-                <label for="email">Email</label>
+                <label for="email">{{ $t("logPage.email") }}</label>
                
             </div>
             <div class="form-floating mb-3">
                 <input type="password" class="form-control" id="password" :class="{ 'is-invalid': errors.message }" v-model="form.password"  placeholder="Password" autocomplete="current-password" />
-                <label for="password">Password</label>
+                <label for="password">{{ $t("logPage.password") }}</label>
             </div>
-            <ButtonAuth>Sign in</ButtonAuth>
+            <ButtonAuth>{{ $t("button.signin") }}</ButtonAuth>
             <ErrorAuthMessage v-if="errors.message"/>
         </form>
     </main>

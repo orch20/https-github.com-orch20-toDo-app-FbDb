@@ -1,0 +1,85 @@
+{
+    "locale": {
+    "en": "English",
+    "es": "Spanish"
+    },
+    "button":{
+        "signin": "Sign In",
+        "signup": "Sign Up",
+        "logout": "Logout",
+        "login": "Login",
+        "register": "Register",
+        "hide": "Hide",
+        "show": "Show",
+        "copmleted": "completed"
+    },
+    "home": {
+        "title": "Stay Organized, be productive",
+        "subtitle": "Organize your ideas, and be productive everyday."
+    },
+    "navbar": {
+        "tasks": "Tasks",
+        "summary": "Summary",
+        "logout": "Logout"
+    },
+    "tasksPage":{
+        "newTaskPlaceholder": "+ Add new task. Press enter to save.",
+    },
+    "footer":{
+        "privacy": "Privacy",
+        "faqs": "FAQs",
+        "about": "About"
+    },
+    "logPage":{
+        "login": "Please sign in",
+        "register": "Please sign up",
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Password Confirmation"
+    },
+    "summaryPage":{
+        "title": "Task Statistics",
+        "value": "Value",
+        "tasks": "Number of Tasks",
+        "completedTasks": "Number of Completed Tasks",
+        "completedPercentage": "Percentage of Completed Tasks",
+        "incompletedTasks": "Number of Incompleted Tasks",
+    },
+    "privacyPage":{
+    "title": "Privacy Policy",
+    "section1": {
+        "subtitle1": "1. Introduction",
+        "content1.1": "Welcome to ToDoList App (\"we,\" \"our,\" or \"us\"). We are committed to protecting your privacy and providing a safe and secure environment for your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our ToDoList app and related services.",
+        "content1.2": "Task Data: We collect and store task-related data, including task titles, descriptions, due dates, priorities, and completion statuses. This data is used to provide you with the task management functionality of our app."
+    },
+    "section2": {
+        "subtitle2": "2. Information We Collect",
+        "content2.1": "2.1 Information You Provide: When you register for an account or use our app, we may collect personal information such as your name, email address, and any other information you choose to provide."
+    },
+    "section3": {
+        "subtitle3": "3. How We Use Your Information",
+        "content3.1": "We use the information we collect for various purposes, including but not limited to:",
+        "content3.2": [
+        "Providing and maintaining the app's functionality.",
+        "Improving the user experience and app features.",
+        "Responding to user inquiries and providing support.",
+        "Sending important notifications and updates.",
+        "Ensuring the security and integrity of our app."
+        ]
+    },
+    "section4": {
+        "subtitle4": "4. Data Security",
+        "content4.1": "We take reasonable measures to protect your data from unauthorized access, disclosure, alteration, and destruction. However, please be aware that no method of transmission over the internet or electronic storage is entirely secure, and we cannot guarantee the absolute security of your data."
+    },
+    "section5": {
+        "subtitle5": "5. Third-Party Services",
+        "content5.1": "Our app may contain links to third-party websites or services that are not operated by us. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites or services."
+    },
+    "section6": {
+        "subtitle6": "6. Changes to This Privacy Policy",
+        "content6.1": "We may update our Privacy Policy from time to time. Any changes will be posted on this page, and the \"Last Updated\" date will be revised accordingly. It is your responsibility to review this Privacy Policy periodically to stay informed of any updates or modifications."
+    }
+    }
+    
+}

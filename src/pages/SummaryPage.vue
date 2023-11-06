@@ -1,29 +1,29 @@
 <template>
     <main style="min-height: 50vh; margin-top: 2rem;">
         <div class="container">
-            <h1 class="title">Task Statistics</h1>
+            <h1 class="title">{{$t("summaryPage.title")}}</h1>
              <table class="table is-fullwidth">
                 <thead>
                     <tr>
-                        <th>Stat</th>                 
-                        <th class="text-center">Value</th>
+                        <th></th>                 
+                        <th class="text-center">{{ $t("summaryPage.value") }}</th>
                     </tr>
                 </thead>
                 <tbody>
               <tr>
-                <td >Number of Tasks</td>
+                <td >{{ $t("summaryPage.tasks") }}</td>
                 <td class="text-center">{{ tasks.length }}</td>
               </tr>
               <tr>
-                <td>Number of Completed Tasks</td>
+                <td>{{ $t("summaryPage.completedTasks") }}</td>
                 <td class="text-center">{{ completedTasks.length }}</td>
               </tr>
               <tr>
-                <td>Number of Incomplete Tasks</td>
+                <td>{{ $t("summaryPage.incompletedTasks") }}</td>
                 <td class="text-center">{{ uncompletedTasks.length }}</td>
               </tr>
               <tr>
-                <td>Percentage of Completed Tasks</td>
+                <td>{{ $t("summaryPage.completedPercentage") }}</td>
                 <td class="text-center">{{percentageOfCompletedTasks()}}%</td>
               </tr>
 

@@ -8,24 +8,24 @@
             <h2 class="h3 mb-4 fw-normal">Please sign up</h2>
              <div class="form-floating mb-2">
                 <input type="name" class="form-control" :class="{ 'is-invalid': false }" id="name" v-model="form.name"  placeholder="Your name" autocomplete="given-name" />
-                <label for="name">Name</label>
+                <label for="name">{{ $t("logPage.name") }}</label>
             </div>
             <div class="form-floating mb-2">
                 <input type="email" class="form-control" :class="{ 'is-invalid': errors.email && errors.email[0] }" id="email" v-model="form.email"  placeholder="name@example.com" autocomplete="email" />
-                <label for="email">Email</label>
+                <label for="email">{{ $t("logPage.email") }}</label>
                 
             </div>
             <div class="form-floating mb-3">
                 <input type="password" class="form-control" id="password" :class="{ 'is-invalid': errors.password && errors.password[0] }" v-model="form.password"  placeholder="Password" autocomplete="new-password"/>
-                <label for="password">Password</label>
+                <label for="password">{{ $t("logPage.password") }}</label>
                 
             </div>
             <div class="form-floating mb-3">
                 <input type="password" class="form-control" :class="{ 'is-invalid': form.passwordNotMatch }" id="password_confirmation" v-model="form.password_confirmation"
                     placeholder="Password Confirmation" autocomplete="new-password" />
-                <label for="password_confirmation">Password Confirmation</label>
+                <label for="password_confirmation">{{ $t("logPage.confirmPassword") }}</label>
             </div>
-            <ButtonAuth>Sign up</ButtonAuth>
+            <ButtonAuth>{{ $t("button.signup") }}</ButtonAuth>
             <ErrorAuthMessage :errorMessage="form.errorMessage" v-if="errors.message || form.passwordNotMatch"/>
         </form>
     </main>

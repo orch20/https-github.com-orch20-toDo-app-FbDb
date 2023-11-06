@@ -1,0 +1,84 @@
+{   
+    "locale": {
+        "en": "Inglés",
+        "es": "Español"
+    },
+    "button": {
+        "signin": "Iniciar sesión",
+        "signup": "Registrarse",
+        "logout": "Cerrar sesión",
+        "login": "Acceso",
+        "register": "Registro",
+        "hide": "Ocultar",
+        "show": "Mostrar",
+        "completed": "Completado"
+    },
+    "home": {
+        "title": "Mantente organizado, sé productivo",
+        "subtitle": "Organiza tus ideas y sé productivo todos los días."
+    },
+    "navbar": {
+        "tasks": "Tareas",
+        "summary": "Resumen",
+        "logout": "Cerrar sesión"
+    },
+    "tasksPage": {
+        "newTaskPlaceholder": "+ Agregar nueva tarea. Presiona Enter para guardar."
+    },
+    "footer": {
+        "privacy": "Privacidad",
+        "faqs": "Preguntas frecuentes",
+        "about": "Acerca de"
+    },
+    "logPage": {
+        "login": "Por favor, inicia sesión",
+        "register": "Por favor, regístrate",
+        "name": "Nombre",
+        "email": "Correo electrónico",
+        "password": "Contraseña",
+        "confirmPassword": "Confirmación de contraseña"
+    },
+    "summaryPage": {
+        "title": "Estadísticas de tareas",
+        "value": "Valor",
+        "tasks": "Número de tareas",
+        "completedTasks": "Número de tareas completadas",
+        "completedPercentage": "Porcentaje de tareas completadas",
+        "incompletedTasks": "Número de tareas incompletas"
+    },
+    "privacyPage": {
+        "title": "Política de privacidad",
+        "section1": {
+            "subtitle1": "1. Introducción",
+            "content11": "Bienvenido a la aplicación ToDoList (\"nosotros\", \"nuestro\" o \"nosotros\"). Estamos comprometidos a proteger su privacidad y proporcionar un entorno seguro para sus datos personales. Esta Política de Privacidad explica cómo recopilamos, usamos, divulgamos y protegemos su información cuando utiliza nuestra aplicación ToDoList y servicios relacionados.",
+            "content12": "Datos de tareas: Recopilamos y almacenamos datos relacionados con las tareas, como títulos de tareas, descripciones, fechas de vencimiento, prioridades y estados de finalización. Estos datos se utilizan para brindarle la funcionalidad de gestión de tareas de nuestra aplicación."
+        },
+        "section2": {
+            "subtitle2": "2. Información que recopilamos",
+            "content21": "2.1 Información que proporciona: Cuando se registra para obtener una cuenta o utiliza nuestra aplicación, podemos recopilar información personal, como su nombre, dirección de correo electrónico y cualquier otra información que elija proporcionar."
+        },
+        "section3": {
+            "subtitle3": "3. Cómo utilizamos su información",
+            "content31": "Utilizamos la información que recopilamos para diversos fines, que incluyen, entre otros:",
+            "content32": [
+                "Proporcionar y mantener la funcionalidad de la aplicación.",
+                "Mejorar la experiencia del usuario y las funciones de la aplicación.",
+                "Responder a las consultas de los usuarios y proporcionar soporte.",
+                "Enviar notificaciones importantes y actualizaciones.",
+                "Garantizar la seguridad y la integridad de nuestra aplicación."
+            ]
+        },
+        "section4": {
+            "subtitle4": "4. Seguridad de los datos",
+            "content41": "Tomamos medidas razonables para proteger sus datos contra el acceso no autorizado, la divulgación, la alteración y la destrucción. Sin embargo, tenga en cuenta que ningún método de transmisión por Internet o almacenamiento electrónico es completamente seguro, y no podemos garantizar la seguridad absoluta de sus datos."
+        },
+        "section5": {
+            "subtitle5": "5. Servicios de terceros",
+            "content51": "Nuestra aplicación puede contener enlaces a sitios web o servicios de terceros que no son operados por nosotros. No tenemos control sobre el contenido, las políticas de privacidad ni las prácticas de ningún sitio web o servicio de terceros."
+        },
+        "section6": {
+            "subtitle6": "6. Cambios en esta Política de Privacidad",
+            "content61": "Podemos actualizar nuestra Política de Privacidad de vez en cuando. Cualquier cambio se publicará en esta página y la fecha de \"Última actualización\" se revisará en consecuencia. Es su responsabilidad revisar periódicamente esta Política de Privacidad para mantenerse informado de las actualizaciones o modificaciones."
+        }
+    }
+}
